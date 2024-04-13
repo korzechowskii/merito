@@ -1,0 +1,17 @@
+2024-04-12 23:04:36,737 - INFO - System zarządzania zasobami został zainicjowany.
+2024-04-12 23:04:45,432 - INFO - Zasób '' został dodany do systemu.
+2024-04-12 23:04:47,154 - INFO - Zasób '' został pomyślnie dodany przez użytkownika.
+2024-04-12 23:04:56,345 - INFO - Wygenerowano listę dostępnych zasobów.
+2024-04-12 23:04:58,187 - INFO - Wyświetlono listę zasobów.
+2024-04-12 23:05:46,023 - INFO - System zarządzania zasobami został zainicjowany.
+2024-04-12 23:09:59,314 - INFO - Zasób '' został dodany do systemu.
+2024-04-12 23:10:00,405 - INFO - Zasób '' został pomyślnie dodany przez użytkownika.
+2024-04-12 23:10:04,998 - INFO - System zarządzania zasobami został zainicjowany.
+2024-04-12 23:10:38,168 - INFO - System zarządzania zasobami został zainicjowany.
+2024-04-12 23:10:59,520 - INFO - System zarządzania zasobami został zainicjowany.
+2024-04-12 23:37:34,081 - INFO - Zasób 'kk' został dodany do systemu.
+2024-04-12 23:37:37,939 - INFO - Wygenerowano listę dostępnych zasobów.
+2024-04-12 23:37:41,665 - WARNING - Próba dodania zasobu, który już istnieje: 'kk'.
+2024-04-13 08:33:16,525 - INFO - Zasób 'assasa' dla sezonu '' został dodany do systemu.
+2024-04-13 08:33:19,811 - INFO - Wygenerowano listę dostępnych zasobów.
+2024-04-13 08:33:23,468 - WARNING - Próba dodania zasobu, który już istnieje: 'assasa' dla sezonu ''.

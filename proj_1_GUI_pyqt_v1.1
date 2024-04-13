@@ -1,0 +1,99 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QMessageBox
+import logging
+
+# Konfiguracja systemu logowania
+logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+class ITResource:
+    def __init__(self):
+        self.resources = {}
+
+    def add_resource(self, name, type, description, season):
+        key = f"{name}-{season}"
+        if key not in self.resources:
+            self.resources[key] = {
+                "name": name,
+                "type": type,
+                "description": description,
+                "season": season,
+                "status": "dostępny",
+                "reservation_time": None
+            }
+            logging.info(f"Zasób '{name}' dla sezonu '{season}' został dodany do systemu.")
+            return True
+        else:
+            logging.warning(f"Próba dodania zasobu, który już istnieje: '{name}' dla sezonu '{season}'.")
+            return False
+    
+    def list_resources(self):
+        logging.info("Wygenerowano listę dostępnych zasobów.")
+        resources_info = "Dostępne zasoby:\n"
+        for key, details in self.resources.items():
+            resources_info += f"{details['name']} ({details['type']}) - {details['description']} - {details['season']} - {details['status']}\n"
+        return resources_info
+
+class ITResourceGUI(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('System Rezerwacji Zasobów IT')
+        self.setGeometry(100, 100, 400, 300)
+
+        # Create widgets
+        self.name_label = QLabel('Nazwa zasobu:')
+        self.type_label = QLabel('Typ zasobu:')
+        self.description_label = QLabel('Opis zasobu:')
+        self.season_label = QLabel('Sezon:')
+        
+        self.name_input = QLineEdit()
+        self.type_input = QLineEdit()
+        self.description_input = QLineEdit()
+        self.season_input = QLineEdit()
+        
+        self.add_button = QPushButton('Dodaj zasób', self)
+        self.add_button.clicked.connect(self.add_resource)
+        
+        self.list_button = QPushButton('Wyświetl zasoby', self)
+        self.list_button.clicked.connect(self.display_resources)
+        
+        # Layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.name_label)
+        layout.addWidget(self.name_input)
+        layout.addWidget(self.type_label)
+        layout.addWidget(self.type_input)
+        layout.addWidget(self.description_label)
+        layout.addWidget(self.description_input)
+        layout.addWidget(self.season_label)
+        layout.addWidget(self.season_input)
+        layout.addWidget(self.add_button)
+        layout.addWidget(self.list_button)
+        
+        self.setLayout(layout)
+        self.resource_manager = ITResource()
+
+    def add_resource(self):
+        name = self.name_input.text()
+        type = self.type_input.text()
+        description = self.description_input.text()
+        season = self.season_input.text()
+        if self.resource_manager.add_resource(name, type, description, season):
+            QMessageBox.information(self, 'System Rezerwacji', f"Zasób '{name}' dla sezonu '{season}' dodany pomyślnie.")
+        else:
+            QMessageBox.warning(self, 'Błąd', f"Zasób '{name}' dla sezonu '{season}' już istnieje.")
+
+    def display_resources(self):
+        resources_info = self.resource_manager.list_resources()
+        QMessageBox.information(self, 'Lista Zasobów', resources_info)
+
+def main():
+    app = QApplication(sys.argv)
+    ex = ITResourceGUI()
+    ex.show()
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
